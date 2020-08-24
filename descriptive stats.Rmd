@@ -1,0 +1,151 @@
+---
+title: "Low microbial biomass within the reproductive tract of late postpartum dairy cows: a study approach - metadata and descriptive statistics"
+author: "L. Lietaer"
+output: html_notebook
+---
+
+This is a notebook about the metadata and descriptive statistics for the microbiome analysis data of Lietaer et al. (2020). 
+
+When you execute code within the notebook, the results appear beneath the code. 
+
+
+## Statistical analysis preface
+
+Currently the following R packages were loaded
+
+```{r, echo=FALSE}
+#Import csv
+if (!require("readr")) {
+  install.packages("readr", dependencies = TRUE)
+  library(readr)
+}
+
+#General purpose toolbox
+if (!require("psych")) {
+  install.packages("psych", dependencies = TRUE)
+  library(psych)
+}
+
+#Dunn's Test - multiple comparisons using rank sums
+if (!require("dunn.test")) {
+  install.packages("dunn.test", dependencies = TRUE)
+  library(dunn.test)
+}
+
+#Visualisations
+if (!require("ggplot2")) {
+  install.packages("ggplot2", dependencies = TRUE)
+  library(ggplot2)
+}
+
+#Customizing 'ggplot2'- based publication ready plots
+if (!require("ggpubr")) {
+  install.packages("ggpubr", dependencies = TRUE)
+  library(ggpubr)
+}
+```
+
+## Data extraction, transformation and loading
+
+The data was read from the csv file
+
+```{r, echo=FALSE}
+#import csv
+data_descriptive_stats <- read_delim("./descriptive.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+
+#summary statistics
+summary(data_descriptive_stats)
+
+#subset - no missing values qpcr
+data_descriptive_stats2 <- data_descriptive_stats[-c(8,11,14,20,23,24),] 
+#subset - controls excluded
+data_descriptive_stats3 <- data_descriptive_stats[c(1:25),] 
+
+#subset - vaginal samples excluded, no missing values qpcr
+data_descriptive_stats4 <- data_descriptive_stats2[-c(17,18,19),] 
+```
+
+# Check normality - Histograms
+
+```{r, echo=FALSE}
+par(mfrow=c(3,2))
+hist(data_descriptive_stats$Quantifluor)
+hist(data_descriptive_stats$qPCR)
+hist(data_descriptive_stats$Reads)
+hist(data_descriptive_stats$Reads_decontam)
+hist(data_descriptive_stats$OTUs)
+hist(data_descriptive_stats$OTUs_decontam)
+```
+# Check normality - shapiro
+```{r, echo=FALSE}
+shapiro.test(data_descriptive_stats$Quantifluor)
+shapiro.test(data_descriptive_stats$qPCR)
+shapiro.test(data_descriptive_stats$Reads)
+shapiro.test(data_descriptive_stats$Reads_decontam)
+shapiro.test(data_descriptive_stats$OTUs)
+shapiro.test(data_descriptive_stats$OTUs_decontam)
+```
+## Comparison tests - Dunn's Test
+```{r, echo=FALSE}
+#qPCR and Quantifluor: Uterus versus Controls
+
+dunn.test(data_descriptive_stats4$qPCR, data_descriptive_stats4$Ut_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats4$Quantifluor, data_descriptive_stats4$Ut_Control, method ="bonferroni")
+```
+
+```{r, echo=FALSE}
+#qPCR and Quantifluor: RT vs RB vs LT vs LB vs VAG
+
+dunn.test(data_descriptive_stats3$qPCR, data_descriptive_stats3$Location, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$Quantifluor, data_descriptive_stats3$Location, method ="bonferroni")
+```
+
+```{r, echo=FALSE}
+#OTUs, Reads, qPCR and Quantifluor: sample (uterus - vagina) vs control
+
+dunn.test(data_descriptive_stats$OTUs, data_descriptive_stats$Sample_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats$OTUs_decontam, data_descriptive_stats$Sample_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats$Reads, data_descriptive_stats$Sample_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats$Reads_decontam, data_descriptive_stats$Sample_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats2$qPCR, data_descriptive_stats2$Sample_Control, method ="bonferroni")
+
+dunn.test(data_descriptive_stats$Quantifluor, data_descriptive_stats$Sample_Control, method ="bonferroni")
+```
+
+```{r, echo=FALSE}
+#OTUs, Reads, qPCR and Quantifluor: uterus vs vagina
+
+dunn.test(data_descriptive_stats3$OTUs, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$OTUs_decontam, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$Reads, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$Reads_decontam, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$qPCR, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+
+dunn.test(data_descriptive_stats3$Quantifluor, data_descriptive_stats3$Ut_Vag, method ="bonferroni")
+```
+
+# Correlation between qPCR and quantifluor
+```{r, echo=FALSE}
+quanticor <- ggscatter(data_descriptive_stats2, x="qPCR", y="Quantifluor", 
+          add = "reg.line", conf.int = TRUE, label = "ID",
+          add.params = list(color = "dodgerblue4", fill = "lightgray"),
+          cor.coef = TRUE, cor.method = "spearman",
+          xlab = "qPCR", ylab = "Quantifluor") +
+  font("xlab", size = 15, color = "black", face = "bold")+
+  font("ylab", size = 15, color = "black", face = "bold")
+plot(quanticor)
+
+cor.test(data_descriptive_stats2$qPCR, data_descriptive_stats2$Quantifluor, method="spearman")
+```
+

@@ -1,0 +1,32 @@
+ID;Cow;Location;Ut_Control;Ut_Vag;Sample_Control;Quantifluor;qPCR;Reads ;OTUs;Reads_decontam;OTUs_decontam
+RT1;1;Right Tip;uterus;uterus;sample;100.9;9771698;290;79;93;26
+RT2;2;Right Tip;uterus;uterus;sample;42.8;4519612;485;26;149;8
+RT3;3;Right Tip;uterus;uterus;sample;150.8;7365322;784;63;284;22
+RT4;4;Right Tip;uterus;uterus;sample;167.7;7265304;617;37;105;11
+RT5;5;Right Tip;uterus;uterus;sample;147.2;7484843;1002;39;163;13
+RB1;1;Right Base;uterus;uterus;sample;75.7;8928216;719;60;356;18
+RB2;2;Right Base;uterus;uterus;sample;165.1;8342868;1073;23;308;8
+RB3;3;Right Base;uterus;uterus;sample;226.3;;412;50;106;13
+RB4;4;Right Base;uterus;uterus;sample;147.8;8047755;758;41;482;18
+RB5;5;Right Base;uterus;uterus;sample;126.8;7938071;611;37;276;9
+LT1;1;Left Tip;uterus;uterus;sample;139.9;;341;47;31;18
+LT2;2;Left Tip;uterus;uterus;sample;230.1;9300519;117681;736;85249;125
+LT3;3;Left Tip;uterus;uterus;sample;97.5;8854294;86456;633;74402;146
+LT4;4;Left Tip;uterus;uterus;sample;163.4;;289;35;197;17
+LT5;5;Left Tip;uterus;uterus;sample;149.2;8225383;150;28;49;9
+LB1;1;Left Base;uterus;uterus;sample;60;6643025;1133;50;378;14
+LB2;2;Left Base;uterus;uterus;sample;134.4;5917261;100921;711;89104;167
+LB3;3;Left Base;uterus;uterus;sample;143.8;7800314;1862;45;900;14
+LB4;4;Left Base;uterus;uterus;sample;84;8054856;1713;33;771;12
+LB5;5;Left Base;uterus;uterus;sample;181.6;;4161;229;3763;158
+VAG1;1;Vagina;;vagina;sample;53;6470490;5744;205;3807;83
+VAG2;2;Vagina;;vagina;sample;181.9;6993741;5183;130;4413;45
+VAG3;3;Vagina;;vagina;sample;201.2;;12929;435;9300;203
+VAG4;4;Vagina;;vagina;sample;137.8;;37901;596;30066;244
+VAG5;5;Vagina;;vagina;sample;101.3;6560494;17952;369;16645;177
+BLANK1;BLANK;BLANK;control;;control;0;1774;7106;90;2;2
+BLANK2;BLANK;BLANK;control;;control;0;1624;22431;111;275;1
+BLANK3;BLANK;BLANK;control;;control;-0.2;1819;30100;250;10944;7
+CTR1;CTR;CTR;control;;control;0;2370;58294;464;;
+CTR2;CTR;CTR;control;;control;2;292435;61041;733;;
+CTR3;CTR;CTR;control;;control;2;1510601;11063;450;;
