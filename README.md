@@ -1,16 +1,8 @@
----
-title: "Low microbial biomass within the reproductive tract of late postpartum dairy cows: a study approach"
-author: "L. Lietaer"
-output: 
-  html_notebook: 
-    theme: united
-    toc: true
----
+# Low microbial biomass within the reproductive tract of late postpartum dairy cows: a study approach"
 
 This is a notebook for the microbiome analysis data of Lietaer et al. (2020). 
 
 When you execute code within the notebook, the results appear beneath the code. 
-
 
 # Statistical analysis preface
 
